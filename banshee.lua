@@ -23,6 +23,19 @@ function is_running ()
   return s:len() > 0
 end
 
+function banshee.is_playing() 
+  if not is_running() then
+    return false
+  else
+    local s = capture("banshee --query-current-state")
+    if (string.find(s, "playing") == nil) then 
+      return false
+    else 
+      return true
+    end
+  end
+end
+
 function banshee.notify_now_playing () 
   if not is_running() then
     io.popen("notify-send -t 4000 -i " .. logo .. " banshee not running...")
@@ -61,6 +74,18 @@ function banshee.pause ()
     io.popen("notify-send -t 4000 -i " .. logo .. " banshee not running...")
   else
     io.popen("banshee --pause")
+  end
+end
+
+function banshee.toggle_play () 
+  if not is_running() then
+    io.popen("notify-send -t 4000 -i " .. logo .. " banshee not running...")
+  else
+    if (banshee.is_playing()) then
+      banshee.pause()
+    else 
+      banshee.play()
+    end
   end
 end
 

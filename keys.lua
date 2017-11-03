@@ -13,10 +13,8 @@ return awful.util.table.join(
     awful.key({ mod.alt  }, "b", player.notify_now_playing,
       {description = "banshee currently playing", group = "banshee"}),
 
-    awful.key({ mod.ctrl }, "Insert", player.play,
-      {description = "banshee play", group = "banshee"}),
-    awful.key({ mod.ctrl }, "Delete", player.pause,
-      {description = "banshee pause", group = "banshee"}),
+    awful.key({ mod.ctrl }, "Delete", player.toggle_play,
+      {description = "banshee play/pause", group = "banshee"}),
     awful.key({ mod.ctrl }, "Home", player.prev_track,
       {description = "banshee previous track", group = "banshee"}),
     awful.key({ mod.ctrl }, "End", player.next_track,
